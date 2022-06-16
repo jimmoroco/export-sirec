@@ -1,0 +1,90 @@
+/* control */
+legend {
+  font-weight: bold;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+/* class */
+.hidden {
+  display: none;
+}
+
+.inline {
+  display: inline;
+}
+
+.header-of-table {
+  color: black;
+}
+
+.row-of-table {
+  background-color: white;
+  color: black;
+}
+
+.row-of-table:hover {
+  background-color: rgb(255, 221, 0);
+}
+
+.without-data {
+  background-color: white;
+  color: black;
+  text-align: center;
+}
+
+.width-page {
+  width: 100%;
+}
+
+.center {
+  display: grid;
+  place-content: center;
+  text-align: center;
+}
+
+.content-width {
+  width: 600px;
+}
+
+.style-section
+{
+  border-radius: 8px;
+  width: 260px;
+  height: 43px;
+}
+
+
+.btn {
+  background-color: rgb(255, 221, 0);
+  border-color: black;
+  border-width: 1px;
+  border-radius: 8px;  
+  font-weight: bold;
+  font-size: 12px;
+  width: 120px;
+  height: 25px;
+  color: black;
+}
+
+.btn:hover {
+  background-color: black;
+  border-color: rgb(255, 221, 0);
+  color: rgb(255, 221, 0);
+}
+
+.without-m-b-p {
+  margin: 0px;
+  border: 0px;
+  padding: 0px;
+}
+
+/* especific */
+#fileName {
+  color: green;
+}
