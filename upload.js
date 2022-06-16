@@ -66,17 +66,12 @@ function getDataAgencies() {
 function showSheets() {
     let html = "";
     for (var i = 0; i < excelFile.SheetNames.length; i++) {
-        // html += "<input type='button'";
-        // html += " value='";
-        // html += excelFile.SheetNames[i];
-        // html += "'";
-        // html += " onclick = 'showDataFromExcel(";
-        // html += i;
-        // html += ");'";
-        // html += ">";
         html += "<a href='#' onclick='executeAction(";
         html += i;
         html += ");'>";
+        html += "<img src='sheet.ico' alt='";
+        html += "Hoja " + excelFile.SheetNames[i];
+        html += "'>";
         html += excelFile.SheetNames[i];
         html += "</a>";
         html += "&nbsp;&nbsp;&nbsp;";
