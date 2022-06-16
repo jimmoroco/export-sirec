@@ -48,23 +48,30 @@ td {
   text-align: center;
 }
 
+.center-content {
+  display: flex;
+  justify-content: center;
+}
+
+.center-table {
+  align-self: center;
+}
+
 .content-width {
   width: 600px;
 }
 
-.style-section
-{
+.style-section {
   border-radius: 8px;
   width: 260px;
   height: 43px;
 }
 
-
 .btn {
   background-color: rgb(255, 221, 0);
   border-color: black;
   border-width: 1px;
-  border-radius: 8px;  
+  border-radius: 8px;
   font-weight: bold;
   font-size: 12px;
   width: 120px;

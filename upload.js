@@ -48,7 +48,7 @@ function exportAgencies() {
     let max_width = _agencies.reduce((w, r) => Math.max(w, r.agencyName.length), 1);
     worksheet["!cols"] = [{ wch: max_width }];
     XLSX.utils.book_append_sheet(workbook, worksheet, "Agencias");
-    XLSX.utils.sheet_add_aoa(worksheet, [["Código", "Agencia"]], { origin: "A1" });
+    XLSX.utils.sheet_add_aoa(worksheet, [["Agencia", "Código"]], { origin: "A1" });
     XLSX.writeFile(workbook, "agencies.xlsx");
 }
 

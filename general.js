@@ -68,13 +68,13 @@ function showData(container, matriz, tBody, summary) {
     tBody.innerHTML = html;
     if (summary) {
         let detailData = `Cantidad de registros: <b>${n}</b>`;
-        container.insertAdjacentHTML("afterbegin", detailData);
+        container.insertAdjacentHTML("beforebegin", detailData);
     }
 }
 
 function createTable(container, headers, tBody) {
     let countOfHeaders = headers.length;
-    let html = "<table>";
+    let html = "<table class='center-table'>";
     html += "<thead>";
     html += "<tr class='header-of-table'>";
     for (let j = 0; j < countOfHeaders; j++) {
