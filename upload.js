@@ -118,7 +118,7 @@ function readFile(obj) {
 }
 
 function loadEnd(f) {
-    fileName.innerText = `¡Se cargó el archivo ${f.name}!`;
+    fileName.innerText = `¡Se cargó el archivo <b>${f.name}</b>!`;
     divUploadIcon.classList.add("hidden");
     btnReload.classList.remove("hidden");
 
