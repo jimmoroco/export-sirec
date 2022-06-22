@@ -85,11 +85,11 @@ td {
   color: rgb(255, 221, 0);
 }
 
-.without-m-b-p {
+/* .without-m-b-p {
   margin: 0px;
   border: 0px;
   padding: 0px;
-}
+} */
 
 /* especific */
 #fileName {
