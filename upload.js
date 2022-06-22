@@ -118,10 +118,9 @@ function readFile(obj) {
 }
 
 function loadEnd(f) {
-    fileName.innerText = `¡Se cargó el archivo <b>${f.name}</b>!`;
-    divUploadIcon.classList.add("hidden");
+    fileName.innerHTML = `¡Se cargó el archivo <b>${f.name}</b>!`;
+    fupload.classList.add("hidden");
     btnReload.classList.remove("hidden");
-
 }
 function showDataFromExcel() {
     let dataTable = "";
@@ -147,9 +146,6 @@ function showDataFromExcel() {
     }
     dataTable += "</table>";
     divExcelFile.innerHTML = dataTable;
-    // if (index > 0) {
-    //     aExportFile.classList.remove("hidden");
-    // }
 }
 
 function clearPage() {
@@ -303,7 +299,8 @@ FILE_17	DESCRIPCION DE LA RESPUESTA
         index++;
     }
     if (indexOfError > 0) {
-        createTable(divError, headersOfError, "tbData");
+        // {header:1, raw:true, cellDates:true}
+        createTable(divError, headersOfError, "tbData", { sort: true, columnSort: '0|2' });
         showData(divError, matrizError, tbData, true);
         divExcelFile.innerHTML = "";
         fsExcelError.classList.remove("hidden");
