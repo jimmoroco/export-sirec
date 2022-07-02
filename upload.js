@@ -197,7 +197,7 @@ function getDataTemplateSGR() {
     let json = "";
     let errorMessage = "";
 
-    let dd, mm, yyyy, excelDate, jsDate;
+    let excelDate, jsDate;
 
     let texto = HEADER_OF_FILE;
     let FILE_00, FILE_01, FILE_02, FILE_03, FILE_04, FILE_05, FILE_06, FILE_07, FILE_08;
@@ -211,7 +211,7 @@ function getDataTemplateSGR() {
     while (str[index]) {
         texto += "\r\n";
         json = str[index];
-        idOfData = json[headers[0]];
+        idOfData = json[headers[0]]; // ID
         for (var j = 0; j < numberOfHeaders; j++) {
             errorMessage = "";
             excelDate = "";
@@ -338,7 +338,7 @@ function getDataTemplateMan() {
     let json = "";
     let errorMessage = "";
 
-    let dd, mm, yyyy, excelDate, jsDate;
+    let excelDate, jsDate;
 
     let texto = HEADER_OF_FILE;
     let FILE_00, FILE_01, FILE_02, FILE_03, FILE_04, FILE_05, FILE_06, FILE_07, FILE_08;
@@ -351,34 +351,138 @@ function getDataTemplateMan() {
     while (str[index]) {
         texto += "\r\n";
         json = str[index];
-        idOfData = json[headers[0]];
+        idOfData = json[headers[1]]; // # del reclamo
         for (var j = 0; j < numberOfHeaders; j++) {
             errorMessage = "";
             excelDate = "";
             jsDate = "";
             switch (j) {
-                case 0: FILE_00 = json[headers[j]]; break;
-                case 1: FILE_01 = json[headers[j]]; break;
-                case 2: FILE_02 = json[headers[j]]; break;
+                case 0:
+                    if (String(json[headers[j]]).trim() == EMPTY) {
+                        errorMessage += `Ingresar el código de sede.`;
+                        addMatrizError(idOfData, json[headers[j]], errorMessage);
+                        break;
+                    }
+                    FILE_00 = json[headers[j]];
+                    break;
+                case 1:
+                    if (String(json[headers[j]]).trim() == EMPTY) {
+                        errorMessage += `Ingresar el número de reclamo.`;
+                        addMatrizError(idOfData, json[headers[j]], errorMessage);
+                        break;
+                    }
+                    FILE_01 = json[headers[j]];
+                    break;
+                case 2:
+                    if (String(json[headers[j]]).trim() == EMPTY) {
+                        errorMessage += `Ingresar el año del reclamo.`;
+                        addMatrizError(idOfData, json[headers[j]], errorMessage);
+                        break;
+                    }
+                    FILE_02 = json[headers[j]];
+                    break;
                 case 3:
                     excelDate = json[headers[j]];
+                    if (String(excelDate).trim() == EMPTY) {
+                        errorMessage += `Ingresar la fecha del reclamo.`;
+                        addMatrizError(idOfData, excelDate, errorMessage);
+                        break;
+                    }
+                    if (isNaN(excelDate)) {
+                        errorMessage += `La fecha del reclamo es incorrecta.`;
+                        addMatrizError(idOfData, excelDate, errorMessage);
+                        break;
+                    }
                     jsDate = excelDate.toJSDate();
                     FILE_03 = jsDate.toISOString().substring(0, 10);
                     break;
-                case 4: FILE_04 = json[headers[j]]; break;
-                case 5: FILE_05 = json[headers[j]]; break;
-                case 6: FILE_06 = json[headers[j]]; break;
+                case 4:
+                    if (String(json[headers[j]]).trim() == EMPTY) {
+                        errorMessage += `Ingresar el nombre del reclamate.`;
+                        addMatrizError(idOfData, json[headers[j]], errorMessage);
+                        break;
+                    }
+                    FILE_04 = json[headers[j]];
+                    break;
+                case 5:
+                    if (String(json[headers[j]]).trim() == EMPTY) {
+                        errorMessage += `Ingresar la dirección del reclamante.`;
+                        addMatrizError(idOfData, json[headers[j]], errorMessage);
+                        break;
+                    }
+                    FILE_05 = json[headers[j]];
+                    break;
+                case 6:
+                    if (String(json[headers[j]]).trim() == EMPTY) {
+                        errorMessage += `Ingresar el número de documento.`;
+                        addMatrizError(idOfData, json[headers[j]], errorMessage);
+                        break;
+                    }
+                    FILE_06 = json[headers[j]];
+                    break;
                 case 7: FILE_07 = json[headers[j]]; break;
                 case 8: FILE_08 = json[headers[j]]; break;
                 case 9: FILE_09 = json[headers[j]]; break;
-                case 10: FILE_10 = json[headers[j]]; break;
-                case 11: FILE_11 = json[headers[j]]; break;
-                case 12: FILE_12 = json[headers[j]]; FILE_12 = FILE_12.replace(/(\r\n|\n|\r)/gm, " "); break;
-                case 13: FILE_13 = json[headers[j]]; break;
-                case 14: FILE_14 = json[headers[j]]; FILE_14 = FILE_14.replace(/(\r\n|\n|\r)/gm, " "); break;
-                case 15: FILE_15 = json[headers[j]]; FILE_15 = FILE_15.replace(/(\r\n|\n|\r)/gm, " "); break;
+                case 10:
+                    if (String(json[headers[j]]).trim() == EMPTY) {
+                        errorMessage += `Ingresar el tipo del bien (P=PRODUCTO, S=SERVICIO, PS= PRODUCTO Y SERVICIO).`;
+                        addMatrizError(idOfData, json[headers[j]], errorMessage);
+                        break;
+                    }
+                    FILE_10 = json[headers[j]];
+                    break;
+                case 11:
+                    if (String(json[headers[j]]).trim() == EMPTY) {
+                        errorMessage += `Ingresar el monto reclamado.`;
+                        addMatrizError(idOfData, json[headers[j]], errorMessage);
+                        break;
+                    }
+                    FILE_11 = json[headers[j]];
+                    break;
+                case 12:
+                    if (String(json[headers[j]]).trim() == EMPTY) {
+                        errorMessage += `Ingresar la descripción del producto o servicio reclamado.`;
+                        addMatrizError(idOfData, json[headers[j]], errorMessage);
+                        break;
+                    }
+                    FILE_12 = json[headers[j]];
+                    FILE_12 = FILE_12.replace(/(\r\n|\n|\r)/gm, " ");
+                    break;
+                case 13:
+                    if (String(json[headers[j]]).trim() == EMPTY) {
+                        errorMessage += `Ingresar el tipo de reclamo (R=RECLAMO, Q=QUEJA).`;
+                        addMatrizError(idOfData, json[headers[j]], errorMessage);
+                        break;
+                    }
+                    FILE_13 = json[headers[j]];
+                    break;
+                case 14:
+                    if (String(json[headers[j]]).trim() == EMPTY) {
+                        errorMessage += `Ingresar el detalle del reclamo.`;
+                        addMatrizError(idOfData, json[headers[j]], errorMessage);
+                        break;
+                    }
+                    FILE_14 = json[headers[j]]; FILE_14 = FILE_14.replace(/(\r\n|\n|\r)/gm, " ");
+                    break;
+                case 15:
+                    if (String(json[headers[j]]).trim() == EMPTY) {
+                        errorMessage += `Ingresar el pedido del reclamante.`;
+                        addMatrizError(idOfData, json[headers[j]], errorMessage);
+                        break;
+                    }
+                    FILE_15 = json[headers[j]]; FILE_15 = FILE_15.replace(/(\r\n|\n|\r)/gm, " ");
+                    break;
                 case 16:
                     excelDate = json[headers[j]];
+                    if (String(excelDate).trim() == EMPTY) {
+                        FILE_16 = "";
+                        break;
+                    }
+                    if (isNaN(excelDate)) {
+                        errorMessage += `La fecha de la respuesta del reclamo es incorrecta.`;
+                        addMatrizError(idOfData, excelDate, errorMessage);
+                        break;
+                    }
                     jsDate = excelDate.toJSDate();
                     FILE_16 = jsDate.toISOString().substring(0, 10);
                     break;
