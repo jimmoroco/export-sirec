@@ -42,6 +42,10 @@ td {
   width: 100%;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .center {
   display: grid;
   place-content: center;
@@ -63,8 +67,12 @@ td {
 
 .style-section {
   border-radius: 8px;
-  width: 260px;
-  height: 43px;
+  width: 250px;
+  height: 100px;
+}
+
+.bold {
+  font-weight: bold;
 }
 
 .btn {
