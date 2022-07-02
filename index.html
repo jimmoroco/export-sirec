@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,7 @@
     <link href="css.css" rel="stylesheet" />
     <title>SIREC</title>
 </head>
+
 <body>
     <div class="width-page center">
         <fieldset class="content-width">
@@ -31,7 +33,6 @@
         <fieldset id="fsExcelError" class="hidden content-width">
             <legend>Errores Excel</legend>
             <div id="divError" class="center-content"></div>
-
         </fieldset>
 
         <fieldset id="fsExportSIREC" class="hidden content-width">
@@ -41,14 +42,20 @@
 
         <fieldset id="fsControl" class="content-width">
             <legend>Control</legend>
-
-            <fieldset class="inline style-section">
+            <fieldset>
                 <legend>Opciones</legend>
                 <label for="chkHideOriginData">No mostrar data original cargada
                     <input type="checkbox" name="chkHideOriginData" id="chkHideOriginData" checked>
                 </label>
+                <br>
+                <label for="rbTemplateSGR">Plantilla SGR
+                    <input type="radio" id="rbTemplateSGR" name="rbsTemplate" value="templateSGR">
+                </label>
+                <label for="rbTemplateMan">Plantilla Manual
+                    <input type="radio" id="rbTemplateMan" name="rbsTemplate" value="templateMan" checked>
+                </label>
             </fieldset>
-            <fieldset class="inline style-section">
+            <fieldset>
                 <legend>Acciones</legend>
                 <input type="button" value="Volver a cargar" id="btnReload" class="btn hidden">
                 <!-- &#x00A; -->
@@ -61,6 +68,11 @@
     <script type="text/javascript" src="agencies.js"></script>
     <script type="text/javascript" src="lists.js"></script>
     <script type="text/javascript" src="upload.js"></script>
+    <footer class="center">
+        Copyright &copy; 2012-2013
+        <br>
+        Versi&oacute;n 1.0.3
+    </footer>
 </body>
 
 </html>

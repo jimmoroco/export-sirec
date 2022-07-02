@@ -40,6 +40,7 @@ function createCombo(cbo, arrayList, firstItem) {
 }
 
 function showData(container, matriz, tBody, summary) {
+    tBody.innerHTML = "";
     let html = "";
     let n = matriz.length;
     let countOfHeaders = matriz[0].length;
@@ -64,8 +65,15 @@ function showData(container, matriz, tBody, summary) {
     }
     tBody.innerHTML = html;
     if (summary) {
-        let detailData = `Cantidad de registros: <b>${n}</b>`;
-        container.insertAdjacentHTML("beforebegin", detailData);
+        if (document.getElementById("spanSummary")) container.parentNode.removeChild(document.getElementById("spanSummary"));
+        let spanSummary = document.createElement("span");
+        spanSummary.id = "spanSummary";
+        let spanDetail = "";
+        spanDetail += "Cantidad de registros: <b>";
+        spanDetail += n;
+        spanDetail += "</b>";
+        spanSummary.innerHTML = spanDetail;
+        container.insertAdjacentElement("beforebegin", spanSummary);
     }
     matrizTmp = matriz;
     containerTmp = container;
@@ -73,31 +81,26 @@ function showData(container, matriz, tBody, summary) {
 }
 
 function createTable(container, headers, tBody, opts) {
+    container.innerHTML = "";
+    if (opts.sort) opts.columnSort = opts.columnSort ? opts.columnSort.split('|') : '';
+    //if (opts.pages) opts.pages.page = opts.columnSort ? opts.columnSort.split('|') : '';
     let countOfHeaders = headers.length;
-
-    let sort, columnSort;
-    let o = opts || {};
-    if (o.sort == null) sort = null;
-    else sort = o.sort;
-
-    if (sort) columnSort = o.columnSort.split('|');
-
-    console.log(columnSort);
-
     let html = "<table class='center-table'>";
     html += "<thead>";
     html += "<tr class='header-of-table'>";
     for (let j = 0; j < countOfHeaders; j++) {
-        if (columnSort.includes(String(j))) {
-            html += "<th onclick = 'javascript:sortTable(";//this);'>";
+        if ((opts.sort && opts.columnSort.includes(String(j))) || (opts.sort && opts.columnSort == '')) {
+            html += "<th onclick = 'javascript:sortTable(";
             html += j;
-            html += ", this);'>";
+            html += ", this);' class = 'cursor-pointer'>";
+            html += headers[j];
+            html += "</th>";
         }
         else {
             html += "<th>";
+            html += headers[j];
+            html += "</th>";
         }
-        html += headers[j];
-        html += "</th>";
     }
     html += "</tr>";
     html += "</thead>";

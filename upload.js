@@ -171,6 +171,27 @@ function addMatrizError(id, value, errorMessage) {
 }
 
 function getData() {
+    const radioButtons = document.querySelectorAll('input[name="rbsTemplate"]');
+    let selectedTemplate;
+    for (const radioButton of radioButtons) {
+        if (radioButton.checked) {
+            selectedTemplate = radioButton.value;
+            break;
+        }
+    }
+    switch (selectedTemplate) {
+        case "templateSGR":
+            return getDataTemplateSGR();
+        case "templateMan":
+            return getDataTemplateMan();
+        default:
+            return "";
+    }
+}
+
+function getDataTemplateSGR() {
+    matrizError = [];
+    indexOfError = 0;
     let idOfData = 0;
     let index = 0;
     let json = "";
@@ -299,8 +320,83 @@ FILE_17	DESCRIPCION DE LA RESPUESTA
         index++;
     }
     if (indexOfError > 0) {
-        // {header:1, raw:true, cellDates:true}
-        createTable(divError, headersOfError, "tbData", { sort: true, columnSort: '0|2' });
+        let opts = { sort: true, columnSort: '0|2', pages: { pageOfRows: 10 } };
+        createTable(divError, headersOfError, "tbData", opts);
+        showData(divError, matrizError, tbData, true);
+        divExcelFile.innerHTML = "";
+        fsExcelError.classList.remove("hidden");
+        return "";
+    }
+    return texto;
+}
+
+function getDataTemplateMan() {
+    matrizError = [];
+    indexOfError = 0;
+    let idOfData = 0;
+    let index = 0;
+    let json = "";
+    let errorMessage = "";
+
+    let dd, mm, yyyy, excelDate, jsDate;
+
+    let texto = HEADER_OF_FILE;
+    let FILE_00, FILE_01, FILE_02, FILE_03, FILE_04, FILE_05, FILE_06, FILE_07, FILE_08;
+    let FILE_09, FILE_10, FILE_11, FILE_12, FILE_13, FILE_14, FILE_15, FILE_16, FILE_17;
+
+    let headers = new Array();
+    let str = XLSX.utils.sheet_to_json(excelFile.Sheets[excelFile.SheetNames[indexOfSheet]]);
+    for (let key in str[0]) headers.push(key);
+    let numberOfHeaders = headers.length;
+    while (str[index]) {
+        texto += "\r\n";
+        json = str[index];
+        idOfData = json[headers[0]];
+        for (var j = 0; j < numberOfHeaders; j++) {
+            errorMessage = "";
+            excelDate = "";
+            jsDate = "";
+            switch (j) {
+                case 0: FILE_00 = json[headers[j]]; break;
+                case 1: FILE_01 = json[headers[j]]; break;
+                case 2: FILE_02 = json[headers[j]]; break;
+                case 3:
+                    excelDate = json[headers[j]];
+                    jsDate = excelDate.toJSDate();
+                    FILE_03 = jsDate.toISOString().substring(0, 10);
+                    break;
+                case 4: FILE_04 = json[headers[j]]; break;
+                case 5: FILE_05 = json[headers[j]]; break;
+                case 6: FILE_06 = json[headers[j]]; break;
+                case 7: FILE_07 = json[headers[j]]; break;
+                case 8: FILE_08 = json[headers[j]]; break;
+                case 9: FILE_09 = json[headers[j]]; break;
+                case 10: FILE_10 = json[headers[j]]; break;
+                case 11: FILE_11 = json[headers[j]]; break;
+                case 12: FILE_12 = json[headers[j]]; FILE_12 = FILE_12.replace(/(\r\n|\n|\r)/gm, " "); break;
+                case 13: FILE_13 = json[headers[j]]; break;
+                case 14: FILE_14 = json[headers[j]]; FILE_14 = FILE_14.replace(/(\r\n|\n|\r)/gm, " "); break;
+                case 15: FILE_15 = json[headers[j]]; FILE_15 = FILE_15.replace(/(\r\n|\n|\r)/gm, " "); break;
+                case 16:
+                    excelDate = json[headers[j]];
+                    jsDate = excelDate.toJSDate();
+                    FILE_16 = jsDate.toISOString().substring(0, 10);
+                    break;
+                case 17: FILE_17 = json[headers[j]]; FILE_17 = FILE_17.replace(/(\r\n|\n|\r)/gm, " "); break;
+                default: break;
+            }
+        }
+        if (indexOfError == 0) {
+            texto += FILE_00 + "|" + FILE_01 + "|" + FILE_02 + "|" + FILE_03 + "|" + FILE_04 + "|";
+            texto += FILE_05 + "|" + FILE_06 + "|" + FILE_07 + "|" + FILE_08 + "|" + FILE_09 + "|";
+            texto += FILE_10 + "|" + FILE_11 + "|" + FILE_12 + "|" + FILE_13 + "|" + FILE_14 + "|";
+            texto += FILE_15 + "|" + FILE_16 + "|" + FILE_17;
+        }
+        index++;
+    }
+    if (indexOfError > 0) {
+        let opts = { sort: true, columnSort: '0|2', pages: { pageOfRows: 10 } };
+        createTable(divError, headersOfError, "tbData", opts);
         showData(divError, matrizError, tbData, true);
         divExcelFile.innerHTML = "";
         fsExcelError.classList.remove("hidden");
