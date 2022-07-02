@@ -8,7 +8,7 @@ let headersOfError = ["Id", "Valor evaluado", "Descripcion del error"];
 // let upperLimit = 10;
 
 const FILE_UPLOAD_ACCEPT = "application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-const HEADER_OF_FILE = "CODIGO DE SEDE|NRO DE RECLAMO(000000001)|AÑO DE RECLAMO(YYYY)|FECHA(YYYY-MMDD)|NOMBRES O RAZON SOCIAL|DIRECCION|NRO DOCUMENTO|TELEFONO|EMAIL|PADRE O MADRE(MENORES DE EDAD)|TIPO DEL BIEN(PRODUCTO=P O SERVICIO=S O AMBOS=PS)|MONTO RECLAMADO(TEXTO)|DESCRIPCION|TIPO DE RECLAMO(RECLAMO=R O QUEJA=Q)|DETALLE|PEDIDO|FECHA DE RESPUESTA(YYYY-MM-DD)|DESCRIPCION DE LA RESPUESTA";
+//const HEADER_OF_FILE = "CODIGO DE SEDE|NRO DE RECLAMO(000000001)|AÑO DE RECLAMO(YYYY)|FECHA(YYYY-MMDD)|NOMBRES O RAZON SOCIAL|DIRECCION|NRO DOCUMENTO|TELEFONO|EMAIL|PADRE O MADRE(MENORES DE EDAD)|TIPO DEL BIEN(PRODUCTO=P O SERVICIO=S O AMBOS=PS)|MONTO RECLAMADO(TEXTO)|DESCRIPCION|TIPO DE RECLAMO(RECLAMO=R O QUEJA=Q)|DETALLE|PEDIDO|FECHA DE RESPUESTA(YYYY-MM-DD)|DESCRIPCION DE LA RESPUESTA";
 const NEW_LINE_HTML = "<br />";
 
 const DEFAULT_ADDRESS = "SIN DIRECCIÓN";
@@ -199,7 +199,7 @@ function getDataTemplateSGR() {
 
     let excelDate, jsDate;
 
-    let texto = HEADER_OF_FILE;
+    let texto;
     let FILE_00, FILE_01, FILE_02, FILE_03, FILE_04, FILE_05, FILE_06, FILE_07, FILE_08;
     let FILE_09, FILE_10, FILE_11, FILE_12, FILE_13, FILE_14, FILE_15, FILE_16, FILE_17;
 
@@ -209,7 +209,6 @@ function getDataTemplateSGR() {
     let numberOfHeaders = headers.length;
 
     while (str[index]) {
-        texto += "\r\n";
         json = str[index];
         idOfData = json[headers[0]]; // ID
         for (var j = 0; j < numberOfHeaders; j++) {
@@ -318,6 +317,7 @@ FILE_17	DESCRIPCION DE LA RESPUESTA
             texto += FILE_15 + "|" + FILE_16 + "|" + FILE_17;
         }
         index++;
+        if (str[index]) texto += "\r\n";
     }
     if (indexOfError > 0) {
         let opts = { sort: true, columnSort: '0|2', pages: { pageOfRows: 10 } };
@@ -340,7 +340,7 @@ function getDataTemplateMan() {
 
     let excelDate, jsDate;
 
-    let texto = HEADER_OF_FILE;
+    let texto = "";
     let FILE_00, FILE_01, FILE_02, FILE_03, FILE_04, FILE_05, FILE_06, FILE_07, FILE_08;
     let FILE_09, FILE_10, FILE_11, FILE_12, FILE_13, FILE_14, FILE_15, FILE_16, FILE_17;
 
@@ -349,7 +349,6 @@ function getDataTemplateMan() {
     for (let key in str[0]) headers.push(key);
     let numberOfHeaders = headers.length;
     while (str[index]) {
-        texto += "\r\n";
         json = str[index];
         idOfData = json[headers[1]]; // # del reclamo
         for (var j = 0; j < numberOfHeaders; j++) {
@@ -497,6 +496,7 @@ function getDataTemplateMan() {
             texto += FILE_15 + "|" + FILE_16 + "|" + FILE_17;
         }
         index++;
+        if (str[index]) texto += "\r\n";
     }
     if (indexOfError > 0) {
         let opts = { sort: true, columnSort: '0|2', pages: { pageOfRows: 10 } };
