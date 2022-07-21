@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 
 <head>
@@ -11,6 +11,24 @@
 
 <body>
     <div class="width-page center">
+        <fieldset class="content-width">
+            <legend>Opciones</legend>
+            <label for="chkDarkTheme">Dark Theme
+                <input type="checkbox" name="chkDarkTheme" id="chkDarkTheme">
+            </label>
+            <br>
+            <label for="chkHideOriginData">No mostrar data original cargada
+                <input type="checkbox" name="chkHideOriginData" id="chkHideOriginData" checked>
+            </label>
+            <br>
+            <label for="rbTemplateSGR">Plantilla SGR
+                <input type="radio" id="rbTemplateSGR" name="rbsTemplate" value="templateSGR">
+            </label>
+            <label for="rbTemplateMan">Plantilla Manual
+                <input type="radio" id="rbTemplateMan" name="rbsTemplate" value="templateMan" checked>
+            </label>
+        </fieldset>
+
         <fieldset class="content-width">
             <legend>Archivo Excel</legend>
             <label for="fupload">
@@ -40,39 +58,20 @@
             <a id="aExportFile" href="#">Descargar</a>
         </fieldset>
 
-        <fieldset id="fsControl" class="content-width">
-            <legend>Control</legend>
-            <fieldset>
-                <legend>Opciones</legend>
-                <label for="chkHideOriginData">No mostrar data original cargada
-                    <input type="checkbox" name="chkHideOriginData" id="chkHideOriginData" checked>
-                </label>
-                <br>
-                <label for="rbTemplateSGR">Plantilla SGR
-                    <input type="radio" id="rbTemplateSGR" name="rbsTemplate" value="templateSGR">
-                </label>
-                <label for="rbTemplateMan">Plantilla Manual
-                    <input type="radio" id="rbTemplateMan" name="rbsTemplate" value="templateMan" checked>
-                </label>
-            </fieldset>
-            <fieldset>
-                <legend>Acciones</legend>
-                <input type="button" value="Volver a cargar" id="btnReload" class="btn hidden">
-                <!-- &#x00A; -->
-                <input type="button" value="Exportar agencias" id="btnExportAgencies" class="btn">
-            </fieldset>
+
+        <fieldset class="content-width">
+            <legend>Acciones</legend>
+            <input type="button" value="Exportar agencias" id="btnExportAgencies" class="btn">
+            &#x00A;
+            <input type="button" value="Volver a cargar" id="btnReload" class="btn hidden">
         </fieldset>
+
     </div>
     <script type="text/javascript" src="xlsx.mini.js"></script>
     <script type="text/javascript" src="general.js"></script>
     <script type="text/javascript" src="agencies.js"></script>
     <script type="text/javascript" src="lists.js"></script>
     <script type="text/javascript" src="upload.js"></script>
-    <footer class="center">
-        Copyright &copy; 2022
-        <br>
-        Versi&oacute;n 1.0.4
-    </footer>
+    <footer class="center">Copyright &copy; 2022<br>Versi&oacute;n 1.0.4</footer>
 </body>
-
 </html>

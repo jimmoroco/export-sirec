@@ -92,7 +92,7 @@ function createTable(container, headers, tBody, opts) {
         if ((opts.sort && opts.columnSort.includes(String(j))) || (opts.sort && opts.columnSort == '')) {
             html += "<th onclick = 'javascript:sortTable(";
             html += j;
-            html += ", this);' class = 'cursor-pointer'>";
+            html += ", this);' class='cursor-pointer'>";
             html += headers[j];
             html += "</th>";
         }
@@ -131,16 +131,7 @@ function sortTable(j, th) {
 }
 
 function sortFunction(a, b) {
-    if (a[sortIndex] === b[sortIndex]) {
-        return 0;
-    }
-    else {
-        if (sortType == 'A') {
-            return (a[sortIndex] > b[sortIndex]) ? -1 : 1;
-        }
-        else {
-            return (a[sortIndex] < b[sortIndex]) ? -1 : 1;
-        }
-
-    }
+    if (a[sortIndex] === b[sortIndex]) return 0;
+    if (sortType == 'A') return (a[sortIndex] > b[sortIndex]) ? -1 : 1;
+    if (sortType == 'D') return (a[sortIndex] < b[sortIndex]) ? -1 : 1;
 }
