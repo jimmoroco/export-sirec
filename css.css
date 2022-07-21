@@ -11,6 +11,11 @@ td {
 }
 
 /* class */
+.dark-mode {
+  background-color: rgb(27, 27, 27);
+  color: white;
+}
+
 .hidden {
   display: none;
 }
@@ -62,7 +67,7 @@ td {
 }
 
 .content-width {
-  width: 600px;
+  width: 100%;
 }
 
 .style-section {
@@ -76,6 +81,29 @@ td {
 }
 
 .btn {
+  background-color: black;
+  border-color: rgb(255, 221, 0);
+  border-width: 1px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 12px;
+  width: 120px;
+  height: 25px;
+  color: rgb(255, 221, 0);
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: rgb(255, 221, 0);
+  border-color: black;
+  color: black;
+}
+
+.btn:active {
+  transform: scale(0.9);
+}
+
+.btn-dark-mode {
   background-color: rgb(255, 221, 0);
   border-color: black;
   border-width: 1px;
@@ -85,12 +113,21 @@ td {
   width: 120px;
   height: 25px;
   color: black;
+  cursor: pointer;
 }
 
-.btn:hover {
+.btn-dark-mode:hover {
   background-color: black;
   border-color: rgb(255, 221, 0);
   color: rgb(255, 221, 0);
+}
+
+.btn-dark-mode:active {
+  transform: scale(0.9);
+}
+
+.without-border {
+  border: 0px;
 }
 
 /* especific */

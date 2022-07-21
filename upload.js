@@ -26,6 +26,7 @@ const CLAIM_TYPE = "R";
 const EMPTY = "";
 
 window.onload = function () {
+    validateTheme();
     fupload.accept = FILE_UPLOAD_ACCEPT;
     fupload.onchange = function () {
         readFile(this);
@@ -39,6 +40,44 @@ window.onload = function () {
     btnExportAgencies.onclick = function () {
         exportAgencies();
     }
+    chkDarkTheme.onchange = function () {
+        if (document.getElementById("chkDarkTheme").checked) {
+            darkMode(true);
+        }
+        else {
+            darkMode(false);
+        }
+    }
+}
+
+function validateTheme() {
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        darkMode(true);
+    }
+    else {
+        darkMode(false);
+    }
+}
+
+function darkMode(_active) {
+    const myButtonList = _active ? document.querySelectorAll(".btn") : document.querySelectorAll(".btn-dark-mode");
+    for (let i = 0; i < myButtonList.length; i++) {
+        if (_active) {
+            myButtonList[i].classList.remove("btn");
+            myButtonList[i].classList.add("btn-dark-mode");
+        }
+        else {
+            myButtonList[i].classList.add("btn");
+            myButtonList[i].classList.remove("btn-dark-mode");
+        }
+    }
+    if (_active) {
+        document.body.classList.add("dark-mode");
+    }
+    else {
+        document.body.classList.remove("dark-mode");
+    }
+    document.getElementById("chkDarkTheme").checked = _active;
 }
 
 function exportAgencies() {
