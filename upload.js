@@ -459,7 +459,17 @@ function getDataTemplateMan() {
                     FILE_06 = json[headers[j]];
                     break;
                 case 7: FILE_07 = json[headers[j]]; break;
-                case 8: FILE_08 = json[headers[j]]; break;
+                case 8:
+                    let expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                    if (!String(json[headers[j]]).trim() == EMPTY) {
+                        if (!expr.test(json[headers[j]].trim())) {
+                            errorMessage += `Formato de correo incorrecto.`;
+                            addMatrizError(idOfData, json[headers[j]], errorMessage);
+                            break;
+                        }
+                    }
+                    FILE_08 = json[headers[j]].trim();
+                    break;
                 case 9: FILE_09 = json[headers[j]]; break;
                 case 10:
                     if (String(json[headers[j]]).trim() == EMPTY) {
@@ -508,7 +518,13 @@ function getDataTemplateMan() {
                         addMatrizError(idOfData, json[headers[j]], errorMessage);
                         break;
                     }
-                    FILE_15 = json[headers[j]]; FILE_15 = FILE_15.replace(/(\r\n|\n|\r)/gm, " ");
+                    FILE_15 = json[headers[j]];
+                    if (!FILE_15.replace) {
+                        errorMessage += `El pedido tiene un formato incorrecto.`;
+                        addMatrizError(idOfData, json[headers[j]], errorMessage);
+                        break;
+                    }
+                    FILE_15 = FILE_15.replace(/(\r\n|\n|\r)/gm, " ");
                     break;
                 case 16:
                     excelDate = json[headers[j]];
