@@ -11,6 +11,11 @@ td {
 }
 
 /* class */
+.dark-mode {
+  background-color: rgb(27, 27, 27);
+  color: white;
+}
+
 .hidden {
   display: none;
 }
@@ -42,46 +47,87 @@ td {
   width: 100%;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .center {
   display: grid;
   place-content: center;
   text-align: center;
 }
 
+.center-content {
+  display: flex;
+  justify-content: center;
+}
+
+.center-table {
+  align-self: center;
+}
+
 .content-width {
-  width: 600px;
+  width: 100%;
 }
 
-.style-section
-{
+.style-section {
   border-radius: 8px;
-  width: 260px;
-  height: 43px;
+  width: 250px;
+  height: 100px;
 }
 
+.bold {
+  font-weight: bold;
+}
 
 .btn {
+  background-color: black;
+  border-color: rgb(255, 221, 0);
+  border-width: 1px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 12px;
+  width: 120px;
+  height: 25px;
+  color: rgb(255, 221, 0);
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: rgb(255, 221, 0);
+  border-color: black;
+  color: black;
+}
+
+.btn:active {
+  transform: scale(0.9);
+}
+
+.btn-dark-mode {
   background-color: rgb(255, 221, 0);
   border-color: black;
   border-width: 1px;
-  border-radius: 8px;  
+  border-radius: 8px;
   font-weight: bold;
   font-size: 12px;
   width: 120px;
   height: 25px;
   color: black;
+  cursor: pointer;
 }
 
-.btn:hover {
+.btn-dark-mode:hover {
   background-color: black;
   border-color: rgb(255, 221, 0);
   color: rgb(255, 221, 0);
 }
 
-.without-m-b-p {
-  margin: 0px;
+.btn-dark-mode:active {
+  transform: scale(0.9);
+}
+
+.without-border {
   border: 0px;
-  padding: 0px;
 }
 
 /* especific */
