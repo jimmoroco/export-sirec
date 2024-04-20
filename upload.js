@@ -401,7 +401,7 @@ function getDataTemplateMan() {
                         addMatrizError(idOfData, json[headers[j]], errorMessage);
                         break;
                     }
-                    FILE_00 = json[headers[j]];
+                    FILE_00 = String(json[headers[j]]).trim();
                     break;
                 case 1:
                     if (String(json[headers[j]]).trim() == EMPTY) {
