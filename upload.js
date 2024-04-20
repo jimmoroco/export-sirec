@@ -461,12 +461,18 @@ function getDataTemplateMan() {
                 case 7: FILE_07 = json[headers[j]]; break;
                 case 8:
                     let expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-                    if (!String(json[headers[j]]).trim() == EMPTY) {
-                        if (!expr.test(json[headers[j]].trim())) {
-                            errorMessage += `Formato de correo incorrecto.`;
-                            addMatrizError(idOfData, json[headers[j]], errorMessage);
-                            break;
+                    try {
+                        if (!String(json[headers[j]]).trim() == EMPTY) {
+                            if (!expr.test(json[headers[j]].trim())) {
+                                errorMessage += `Formato de correo incorrecto.`;
+                                addMatrizError(idOfData, json[headers[j]], errorMessage);
+                                break;
+                            }
                         }
+                    } catch (error) {
+                        errorMessage += `Revise el formato del EMAIL, sí es vacío, reemplácelo.`;
+                        addMatrizError(idOfData, json[headers[j]], errorMessage);
+                        break;
                     }
                     FILE_08 = json[headers[j]].trim();
                     break;
